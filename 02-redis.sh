@@ -21,10 +21,10 @@ mkdir -p $logs_folder
 
 validate(){
 if [ $1 -ne 0 ]; then
-    echo -e "${2}...${R}FAILED${N}"|tee -a $logs_file
+    echo -e "$(timestamp) [ERROR] ${2}...${R}FAILED${N}"|tee -a $logs_file
     exit 1
 else
-    echo -e "${2}...${G}SUCCESS${N}" |tee -a $logs_file
+    echo -e "$(timestamp) [INFO] ${2}...${G}SUCCESS${N}" |tee -a $logs_file
 fi
 }
 
@@ -45,7 +45,7 @@ systemctl enable redis &>> $logs_file
 systemctl start redis 
 validate $? "Enable and start redis"
 
-echo "${timestamp} [INFO] ==== Script completed execution at ===="  |tee -a $logs_file
+echo "$(timestamp) [INFO] Script completed in $SECONDS seconds" |tee -a $logs_file
+echo "$(timestamp) [INFO] ==== Script completed execution at ===="  |tee -a $logs_file
 
 
-echo "Script exection time is : $SECONDS"
