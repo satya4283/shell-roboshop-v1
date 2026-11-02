@@ -32,7 +32,7 @@ echo "$(timestamp) [INFO] ==== Script started execution at ===="  |tee -a $logs_
 
 dnf module disable nodejs -y
 dnf module enable nodejs:24 -y
-dnf install nodejs -y
+dnf install nodejs -y &>> $logs_file
 validate $? "Installing nodejs 24"
 
 useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop
