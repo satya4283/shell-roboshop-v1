@@ -90,6 +90,15 @@ fi
 systemctl restart catalogue
 validate $? "Restarting Catalogue"
 
+status_code=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080/health)
+validate $? "Getiing success status code"
+
+if [ $status_code -ne 200]; then
+    echo  -e "$(timestamp) [ERROR] Connection is not established...${R}FAILED${N}"|tee -a $logs_file
+else
+    echo "Connection to mongodb is ${G}OK${N}" |tee -a $logs_file
+fi
+
 echo "$(timestamp) [INFO] Script completed in $SECONDS seconds" |tee -a $logs_file
 echo "$(timestamp) [INFO] ==== Script completed execution at ===="  |tee -a $logs_file
 
