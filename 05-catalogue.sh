@@ -62,7 +62,9 @@ npm install &>> $logs_file
 validate $? "Installing dependencies"
 
 sed -i "s/DOMAIN_NAME/$domain_name/g" $scripts_dir/catalogue.service &>> $logs_file
+validate $? "DOMAIN_NAME updated"
 cp  "$scripts_dir/catalogue.service"  /etc/systemd/system/catalogue.service &>> $logs_file
+validate $? "service file created"
 
 systemctl daemon-reload &>> $logs_file
 systemctl enable catalogue &>> $logs_file
