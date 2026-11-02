@@ -43,6 +43,7 @@ else
     echo -e "$(timestamp) [INFO] System user already exist..${Y}SKIPPING${N}" |tee -a $logs_file
 fi
 
+rm -rf /app
 mkdir /app
 validate $? "Creating app directory"
 
