@@ -41,8 +41,7 @@ if [ $? -ne 0 ]; then
     validate $? "Creating system user"
 else
     echo "$(timestamp) [INFO] System user already exist..${Y}SKIPPING${N}"
-
-
+fi
 
 
 echo "$(timestamp) [INFO] Script completed in $SECONDS seconds" |tee -a $logs_file
