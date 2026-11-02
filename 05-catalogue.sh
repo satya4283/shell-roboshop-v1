@@ -60,10 +60,13 @@ validate $? "Unzapping catalogue"
 npm install &>> $logs_file
 validate $? "Installing dependencies"
 
+sed -i "s/DOMAIN_NAME/$domain_name/g" catalogue.service
 cp catalogue.service /etc/systemd/system/catalogue.service
 
-sed -i "s/DOMAIN_NAME/$domain_name" 
-
+systemctl daemon-reload
+systemctl enable catalogue
+systemctl start catalogue
+validate $? "Start and enabling catalogue"
 
 echo "$(timestamp) [INFO] Script completed in $SECONDS seconds" |tee -a $logs_file
 echo "$(timestamp) [INFO] ==== Script completed execution at ===="  |tee -a $logs_file
