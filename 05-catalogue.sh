@@ -54,6 +54,11 @@ cd /app
 unzip /tmp/catalogue.zip &>> $logs_file
 validate $? "Unzapping the code"
 
+npm install &>> $logs_file
+validate $? "Installing depencies"
+
+
+
 
 
 
