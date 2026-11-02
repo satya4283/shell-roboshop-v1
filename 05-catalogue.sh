@@ -62,7 +62,7 @@ validate $? "Installing dependencies"
 
 cp catalogue.service /etc/systemd/system/catalogue.service
 
-
+sed -i "s/DOMAIN_NAME/$domain_name" 
 
 
 echo "$(timestamp) [INFO] Script completed in $SECONDS seconds" |tee -a $logs_file
