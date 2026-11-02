@@ -30,8 +30,8 @@ fi
 
 echo "${timestamp} [INFO] ====Script started execution at===="
 
-dnf module disable redis -y
-dnf module enable redis:7 -y
+dnf module disable redis -y &>> $logs_file
+dnf module enable redis:7 -y &>> $logs_file
 validate $? "Disable and enable redis"
 
 dnf install redis -y &>> $logs_file
@@ -41,8 +41,8 @@ sed -i  -e 's/^bind 127.0.0.1/bind 0.0.0.0/' -e 's/^protected-mode yes/protected
 validate $? "Updated remote connections and protected mode to redis"
 
 
-systemctl enable redis
-systemctl start redis
+systemctl enable redis &>> $logs_file
+systemctl start redis 
 validate $? "Enable and start redis"
 
 echo "${timestamp} [INFO] ====Script completed execution at===="
