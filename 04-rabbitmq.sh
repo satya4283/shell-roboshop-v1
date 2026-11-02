@@ -41,7 +41,7 @@ validate $? "Enable and start rabbitMQ"
 
 
 sudo rabbitmqctl list_users | grep -qw roboshop 
-if [ $? -ne 0];then
+if [ $? -ne 0 ]; then
     rabbitmqctl add_user roboshop roboshop123 &>> $logs_file
     validate $? "Create RabbitMQ user for roboshop."
 else    
