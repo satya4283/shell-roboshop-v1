@@ -77,7 +77,8 @@ validate $? "Adding  mongo repo"
 dnf install mongodb-mongosh -y &>> $logs_file
 validate $? "Installing mongodb client"
 
-
+mongosh --host mongodb.$domain_name </app/db/master-data.js
+validate "Loading the data into mongodb"
 
 
 echo "$(timestamp) [INFO] Script completed in $SECONDS seconds" |tee -a $logs_file
