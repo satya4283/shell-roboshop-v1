@@ -44,18 +44,20 @@ else
 fi
 
 rm -rf /app
-mkdir /app
+validate $? "Removing old code"
+
+mkdir -p /app
 validate $? "Creating app directory"
 
 curl -L -o /tmp/catalogue.zip https://raw.githubusercontent.com/daws-92s/roboshop-documentation/refs/heads/main/artifacts/catalogue-v4.zip &>> $logs_file
-validate $? "Downloading the code"
+validate $? "Downloading catalogue"
 
 cd /app
 unzip /tmp/catalogue.zip &>> $logs_file
-validate $? "Unzapping the code"
+validate $? "Unzapping catalogue"
 
 npm install &>> $logs_file
-validate $? "Installing depencies"
+validate $? "Installing dependencies"
 
 
 
