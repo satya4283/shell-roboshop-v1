@@ -14,7 +14,7 @@ if [ $user_id -ne 0 ]; then
 fi
 
 timestamp(){
-    date "+%A, %B %d, %Y - %I:%M %p"
+    date "+%F %T"
 }
 
 mkdir -p $logs_folder
@@ -28,7 +28,7 @@ else
 fi
 }
 
-echo "${timestamp} [INFO] ====Script started execution at===="
+echo "${timestamp} [INFO] ==== Script started execution at ===="  |tee -a $logs_file
 
 dnf module disable redis -y &>> $logs_file
 dnf module enable redis:7 -y &>> $logs_file
@@ -45,7 +45,7 @@ systemctl enable redis &>> $logs_file
 systemctl start redis 
 validate $? "Enable and start redis"
 
-echo "${timestamp} [INFO] ====Script completed execution at===="
+echo "${timestamp} [INFO] ==== Script completed execution at ===="  |tee -a $logs_file
 
 
 echo "Script exection time is : $SECONDS"
