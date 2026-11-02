@@ -43,6 +43,19 @@ else
     echo -e "$(timestamp) [INFO] System user already exist..${Y}SKIPPING${N}" |tee -a $logs_file
 fi
 
+mkdir /app
+validate $? "Creating app directory"
+
+curl -L -o /tmp/catalogue.zip https://raw.githubusercontent.com/daws-92s/roboshop-documentation/refs/heads/main/artifacts/catalogue-v4.zip
+validate $? "Downloading the code"
+
+cd /app
+unzip /tmp/catalogue.zip
+validate $? "Unzapping the code"
+
+
+
+
 
 echo "$(timestamp) [INFO] Script completed in $SECONDS seconds" |tee -a $logs_file
 echo "$(timestamp) [INFO] ==== Script completed execution at ===="  |tee -a $logs_file
