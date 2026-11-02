@@ -45,7 +45,7 @@ if [ $? -ne 0];then
     rabbitmqctl add_user roboshop roboshop123 &>> $logs_file
     validate $? "Create RabbitMQ user for roboshop."
 else    
-    echo "$(timestamp) [INFO] Roboshop user already exist...${Y}SKIPPING${N}"
+    echo -e "$(timestamp) [INFO] Roboshop user already exist...${Y}SKIPPING${N}"
 fi
 
 rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*" &>> $logs_file
