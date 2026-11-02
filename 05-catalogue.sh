@@ -30,13 +30,17 @@ fi
 
 echo "$(timestamp) [INFO] ==== Script started execution at ===="  |tee -a $logs_file
 
-dnf module disable nodejs -y
-dnf module enable nodejs:24 -y
+dnf module disable nodejs -y &>> $logs_file
+dnf module enable nodejs:24 -y &>> $logs_file
 dnf install nodejs -y &>> $logs_file
 validate $? "Installing nodejs 24"
 
-useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop
-validate $? "Creating system user"
+id roboshop
+if [ $? -ne 0 ]; then
+    useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>> $logs_file
+    validate $? "Creating system user"
+else
+    echo "$(timestamp) [INFO] System user already exist..${Y}SKIPPING${N}"
 
 
 
