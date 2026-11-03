@@ -32,16 +32,16 @@ fi
 
 echo "$(timestamp) [INFO] ==== Script started execution at ===="  |tee -a $logs_file
 
-dnf module enable maven:3.9 -y
-dnf install maven java-25-openjdk-devel -y
+dnf module enable maven:3.9 -y &>> $logs_file
+dnf install maven java-25-openjdk-devel -y &>> $logs_file
 validate $? "Installing java and maven"
 
-alternatives --set java "usr/lib/jvm/java-25-openjdk/bin/java"
-validate $? "setting java 25 as default java version"
+alternatives --set java "/usr/lib/jvm/java-25-openjdk/bin/java"
+validate $? "Setting Java 25 as default Java version"
 
-echo "export JAVA_HOME=$(dirname $(dirname $(readlink -f /usr/bin/java)))" > /etc/profile.d/java.sh
-source /etc/profile.d/java.sh
-echo $JAVA_HOME
+echo "export JAVA_HOME=$(dirname $(dirname $(readlink -f /usr/bin/java)))" > /etc/profile.d/java.sh &>> $logs_file
+source /etc/profile.d/java.sh &>> $logs_file
+echo $JAVA_HOME &>> $logs_file
 validate $? "Setting JAVA_HOME for maven"
 
 id roboshop &>> $logs_file
