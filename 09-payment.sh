@@ -68,8 +68,8 @@ cp "$scripts_dir/payment.service" /etc/systemd/system/payment.service
 
 systemctl daemon-reload &>> $logs_file
 systemctl enable payment &>> $logs_file
-ssystemctl start payment
-validate $? "Starting shipping"
+systemctl start payment
+validate $? "Starting payment "
 
 
 echo "$(timestamp) [INFO] Script completed in $SECONDS seconds"
