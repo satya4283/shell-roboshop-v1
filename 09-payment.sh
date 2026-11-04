@@ -67,9 +67,9 @@ sed -i "s/DOMAIN_NAME/$domain_name/g" "$scripts_dir/payment.service"
 cp "$scripts_dir/payment.service" /etc/systemd/system/payment.service
 
 systemctl daemon-reload &>> $logs_file
-systemctl enable shipping &>> $logs_file
-systemctl restart shipping
-validate $? "Restarting/Starting shipping"
+systemctl enable payment &>> $logs_file
+ssystemctl start payment
+validate $? "Starting shipping"
 
 
 echo "$(timestamp) [INFO] Script completed in $SECONDS seconds"
