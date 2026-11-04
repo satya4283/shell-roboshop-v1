@@ -60,7 +60,7 @@ cd /app
 python3.14 -m venv /app/.venv  &>> $logs_file
 validate $? "Creating virtual environment"
 
-/app/.venv/bin/pip install -r requirements.txt
+/app/.venv/bin/pip install -r requirements.txt &>> $logs_file
 validate $? "Installing dependencies"
 
 sed -i "s/DOMAIN_NAME/$domain_name/g" "$scripts_dir/payment.service"
